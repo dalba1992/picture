@@ -1,0 +1,15 @@
+{
+    "name": "com.catchoom.test",
+    "version": "0.0.1",
+    "displayName": "CraftARDemo",
+    "cordova": {
+        "platforms": [
+        ],
+        "plugins": {
+            "cordova-plugin-whitelist": {}
+        }
+    },
+    "dependencies": {
+        "cordova-plugin-whitelist": "1"
+    }
+}
