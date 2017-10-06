@@ -73,12 +73,19 @@
                 }
             }
 
+            function goBack() {
+                CraftARSDK.closeView();
+                CraftARSDK.stopFinder();
+            }
         </script>
 
     </head>
     <body >
         <div class="bar bar-header bar-light">
             <h5 class="title" id="headerTitle">Cloud Recognition Example</h5>
+            <ion-nav-buttons side="left">
+                <button class="button button-clear" onclick="goBack()" >Back</button>
+            </ion-nav-buttons>
         </div>
 
         <div class="tabs tabs-icon-only" >
