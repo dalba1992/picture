@@ -28,7 +28,7 @@
                 // Error searching, restart the capture
                 toggleTabItem("#loadingGif", "hide");
                 toggleTabItem("#shutterButton", "show");
-                CraftARSDK.getCamera.restartCapture();
+                CraftARSDK.camera.restartCapture();
             }
 
             function getResults(results) {
@@ -46,7 +46,7 @@
                 } else {
                     alert("Nothing found!");
                 }
-                CraftARSDK.getCamera.restartCapture();
+                CraftARSDK.camera.restartCapture();
             }
 
             function didStartCapture() {
