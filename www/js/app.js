@@ -12,18 +12,27 @@ angular.module('starter', ['ionic'])
             }
         });
     })
-    .controller('ScanController', function ($scope, $timeout) {
+    .controller('ScanController', function ($scope, $timeout, $ionicLoading) {
         //Variables angular
         $scope.isLoading = true;
         //
         $scope.init = init;
         $scope.restartScan = restartScan;
+        $ionicLoading.show({
+            template: '<svg class="loader" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">\n' +
+            '  <circle class="internal-circle" cx="60" cy="60" r="30"></circle>\n' +
+            '  <circle class="external-circle" cx="60" cy="60" r="50"></circle>\n' +
+            '</svg>',
+            noBackdrop: false   
+        });
 
         function init() {
             $timeout(function () {
                 $scope.isLoading = false;
-            }, 2000);
-            CraftARSDK.startView(null, null, {"loadUrl": "single_shot_search.html"});
+                $ionicLoading.hide();
+                CraftARSDK.startView(null, null, {"loadUrl": "single_shot_search.html"});
+
+            }, 3000);
         }
 
         function restartScan() {

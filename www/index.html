@@ -17,7 +17,133 @@
 
     <!-- cordova js -->
     <script src="cordova.js"></script>
+<style>
 
+    .loading-container .loading{
+        padding: 0;
+        background: none;
+    }
+        .loader {
+        width: 120px;
+        height: 120px;
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        stroke-linecap: round;
+        stroke-width: 4;
+        fill: none;
+    }
+    .loader .internal-circle,
+    .loader .external-circle {
+        stroke: #fff;
+        stroke-dashoffset: 0;
+        -webkit-transform-origin: center;
+        transform-origin: center;
+    }
+    .loader .internal-circle {
+        stroke-dasharray: 187;
+        -webkit-animation: internal 1s ease-in-out infinite;
+        animation: internal 1s ease-in-out infinite;
+        opacity: .4;
+    }
+    .loader .external-circle {
+        stroke-dasharray: 312;
+        -webkit-animation: external 1s linear infinite;
+        animation: external 1s linear infinite;
+        opacity: .9;
+    }
+    @-webkit-keyframes internal {
+        0% {
+            stroke-dashoffset: 187;
+        }
+        25% {
+            stroke-dashoffset: 80;
+        }
+        100% {
+            stroke-dashoffset: 187;
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes internal {
+        0% {
+            stroke-dashoffset: 187;
+        }
+        25% {
+            stroke-dashoffset: 80;
+        }
+        100% {
+            stroke-dashoffset: 187;
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+    @-webkit-keyframes external {
+        0% {
+            stroke-dashoffset: 312;
+            -webkit-transform: rotate(70deg);
+            transform: rotate(70deg);
+        }
+        60% {
+            stroke-dashoffset: -312;
+        }
+        100% {
+            stroke-dashoffset: -312;
+            -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+        }
+    }
+    @keyframes external {
+        0% {
+            stroke-dashoffset: 312;
+            -webkit-transform: rotate(70deg);
+            transform: rotate(70deg);
+        }
+        60% {
+            stroke-dashoffset: -312;
+        }
+        100% {
+            stroke-dashoffset: -312;
+            -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+        }
+    }
+    @-webkit-keyframes bgcolors {
+        0% {
+            background: #1a87c5;
+        }
+        25% {
+            background: #c51a3a;
+        }
+        50% {
+            background: #e6d121;
+        }
+        75% {
+            background: #22cf76;
+        }
+        100% {
+            background: #1a87c5;
+        }
+    }
+    @keyframes bgcolors {
+        0% {
+            background: #1a87c5;
+        }
+        25% {
+            background: #c51a3a;
+        }
+        50% {
+            background: #e6d121;
+        }
+        75% {
+            background: #22cf76;
+        }
+        100% {
+            background: #1a87c5;
+        }
+    }
+
+</style>
 </head>
 <body ng-app="starter" ng-controller="ScanController">
 
@@ -27,13 +153,7 @@
     </ion-header-bar>
     <ion-content>
         <div class="responsive-container" ng-init="init()">
-            <div id="error" style="z-index: 1000"></div>
-            <div id="loader-container" ng-show="isLoading === true">
-                <div class="circle"></div>
-                <div class="circle-small"></div>
-                <div class="circle-inner-inner"></div>
-                <div class="circle-inner"></div>
-            </div>
+            <div id="error" style="z-index: 1000"></div>          
             <div class="list card" id="scanner-container" ng-show="isLoading === false" ng-click="restartScan()">
                 <div class="item item-divider">
                     Live scanning
@@ -52,7 +172,7 @@
         </div>
     </ion-content>
 
-    <div class="bar bar-footer" style="text-align: center; display: block;">
+    <div class="bar bar-footer" style="text-align: center; display: block;    line-height: 30px;">
         EDC publications &copy; 2018
     </div>
 </ion-pane>
