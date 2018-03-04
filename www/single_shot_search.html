@@ -1,13 +1,14 @@
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="cordova.js"></script>
-    <link href="css/normalize.css" rel="stylesheet" type="text/css" />
-    <link href="css/ionic.css" rel="stylesheet" type="text/css" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-
+    <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
+    <link href="css/ionic.css" rel="stylesheet" type="text/css"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="css/ionic.app.css" rel="stylesheet">
     <script>
         //Variables 
         var popUpActive = false;
@@ -48,7 +49,9 @@
                 toggleTabItem("#loadingGif", "hide");
                 var item = results[0].item;
                 var ref = cordova.InAppBrowser.open(addhttp(item.url), '_blank', 'location=no');
-                ref.addEventListener("exit", function () { CraftARSDK.closeView(); });
+                ref.addEventListener("exit", function () {
+                    CraftARSDK.closeView();
+                });
                 CraftARSDK.stopFinder();
                 // sendLogs(item);
             }
@@ -143,12 +146,12 @@
         }
 
         function setLanguages() {
-            switch(navigator.language){
+            switch (navigator.language) {
                 case "fr-BE":
                     $("#headerTitle").text('Scanner une image');
                     break;
                 default:
-            }       
+            }
         }
 
         $(document).click(function (e) {
@@ -167,12 +170,12 @@
     <h5 class="title" id="headerTitle"></h5>
 </div>
 
-<div class="tabs tabs-icon-only">
+<div class="tabs tabs-icon-only" style="background-color: white;">
     <a class="tab-item" id="shutterButton" style="visibility:hidden;width:0px;">
-        <i class="icon ion-camera" style="font-size:2em" id="mybutton" onclick="singleShotSearch()"></i>       
+        <i class="icon ion-camera" style="font-size:3em" id="mybutton" onclick="singleShotSearch()"></i>
     </a>
     <div id="loadingGif" style="visibility:hidden;width:0px;">
-        <img src="img/spinner.gif" style="height:80%;" />
+        <img src="img/spinner.gif" style="height:80%;"/>
     </div>
 </div>
 </body>
