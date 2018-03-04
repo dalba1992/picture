@@ -2,10 +2,10 @@
 <widget id="com.catchoom.test" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>CraftAR Cloud Image Recognition Examples</name>
     <description>
-        Sample app that shows the CraftAR Cloud Image Recognition cordova plugin in action.
+        Scan your magasines
     </description>
-    <author href="http://catchoom.com">
-        Catchoom Team
+    <author href="303.media">
+        Berger Axel 303Media
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -23,7 +23,11 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <engine name="android" spec="^6.2.3" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
-    <engine name="ios" spec="~4.4.0" />
+    <plugin name="craftar-cordova-cloud-image-recognition" spec="^2.4.3" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
+    <plugin name="cordova-plugin-device" spec="^2.0.1" />
+    <engine name="android" spec="^6.2.3" />
+    <engine name="ios" spec="^4.4.0" />
+    <engine name="browser" spec="^5.0.3" />
 </widget>

@@ -5,20 +5,28 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    .run(function ($ionicPlatform) {
+        $ionicPlatform.ready(function () {
+            if (window.StatusBar) {
+                StatusBar.styleDefault();
+            }
+        });
+    })
+    .controller('ScanController', function ($scope, $timeout) {
+        //Variables angular
+        $scope.isLoading = true;
+        //
+        $scope.init = init;
+        $scope.restartScan = restartScan;
 
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
-})
+        function init() {
+            $timeout(function () {
+                $scope.isLoading = false;
+            }, 2000);
+            CraftARSDK.startView(null, null, {"loadUrl": "single_shot_search.html"});
+        }
+
+        function restartScan() {
+            CraftARSDK.startView(null, null, {"loadUrl": "single_shot_search.html"});
+        }
+    });

@@ -17,41 +17,43 @@
     
     <!-- cordova js -->
     <script src="cordova.js"></script>
-
-    <script>
-      function launchSingleShotSearch() {
-              CraftARSDK.startView(null, null, {"loadUrl" : "single_shot_search.html"});
-      };
-      function launchFinderModeSearch() {
-              CraftARSDK.startView(null, null, {"loadUrl" : "finder_mode_search.html"});
-      };
-    </script>
+    
   </head>
-  <body ng-app="starter">
+  <body ng-app="starter" ng-controller="ScanController">
 
     <ion-pane>
-      <ion-header-bar class="bar-assertive">
-        <h1 class="title">CraftAR SDK Examples</h1>
+      <ion-header-bar class="bar-asser  tive">
+        <h1 class="title">EDC publications</h1>
       </ion-header-bar>
       <ion-content>
-        <div class="list">
-            <a class="item item-thumbnail-left" href="#" onclick="launchSingleShotSearch();">
-              <div class="item item-image" style="height: auto">
-                <img class="" src="img/biz_card.jpg" >
+        <div class="responsive-container" ng-init="init()">
+          <div id="error" style="z-index: 1000"></div>
+          <div id="loader-container" ng-show="isLoading === true">
+            <div class="circle"></div>
+            <div class="circle-small"></div>
+            <div class="circle-inner-inner"></div>
+            <div class="circle-inner"></div>
+          </div>
+          <div class="list card" id="scanner-container" ng-show="isLoading === false" ng-click="restartScan()">
+            <div class="item item-divider">
+              Live scanning
+            </div>
+            <div class="item item-body text-center full-height">
+              <div class="image-container">
+                <i class="icon ion-camera" style="font-size:2em"></i>
+                <h3>
+                  Click here to restart the live scanning
+                </h3>
+                <p>
               </div>
-              <h2>Single Shot Search</h2>
-            </a>
-            <a class="item item-thumbnail-left" href="#" onclick="launchFinderModeSearch();">
-              <div class="item item-image" style="height: auto">
-                <img class="" src="img/craftar_room.jpg" >
-              </div>
-              <h2>Finder Mode search</h2>
-            </a>
+            </div>
+          </div>
+
         </div>
       </ion-content>
 
     <div class="bar bar-footer assertive">
-      <div class="title"><a href="http://catchoom.com">Visit CraftAR</a></div>
+     EDC publications &copy; 2018
     </div>
     </ion-pane>
   </body>

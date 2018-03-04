@@ -1,13 +1,30 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 08-mar-2016, 10:25:24
-    Author     : Oriol
-*/
+/*#region Helper */
 
+.full-height {
+    height: 100%;
+}
+
+/*#endregion */
+#app-content {
+    height: 100vh;
+}
+
+div#scanner-container {
+    height: calc(100vh - 40px);
+}
+
+.image-container {
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    height: 30%;
+    width: 50%;
+    margin: -15% 0 0 -25%;
+}
+
+.image-container > img {
+    height: 35%;
+}
 
 footer {
     background-color: black;
@@ -18,84 +35,285 @@ footer {
     height: 100px;
 }
 
-#shutterButton{
-
-
-    text-align:center; 
+#shutterButton {
+    text-align: center;
     vertical-align: middle;
-    position:relative;
+    position: relative;
     line-height: 30px;
-
 }
 
 
-#mybutton{
-    height:100%;
+#mybutton {
+    height: 100%;
 }
 
 #popUpDiv {
-
-    width: 80%;
-    height: auto;
     background-color: #ECECEC;
-    position:fixed; /*it can be fixed too*/
-    left:0; right:0;
-    top:0; bottom:0;
-    margin:auto;
-    position:absolute; height:80%; width:80%;
-    display: none;  
-    -webkit-appearance: none;
+    display: none;
 }
 
-#responseDiv{
+#popUpMainDiv {
+    margin-top: 42px;
+    height: calc(100% - 88px);
+}
 
-    width:90%;
-    position: absolute;
-    
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-   -webkit-transform: translate(-50%, -50%);
+#responseDiv {
     text-align: center;
     vertical-align: middle;
     -webkit-appearance: none;
-    overflow:hidden;
+    overflow: hidden;
+    height: 100%;
 }
 
-#closeButton{
-
-
+#closeButton {
     position: absolute;
-    right:20;
-    top:20;
+    right: 4%;
+    top: 2%;
     width: 20px;
-
-
-
+    background-color: rgba(33,33,33,0.4);
+    z-index: 1;
+    max-width: 80%;
+    max-height: 80%;
 }
 
-#imageResponse{
-    margin-bottom:10%;
-    width:100%;
-
+#imageResponse {
+    margin-top: 5px;
+    margin-bottom: 10%;
+    width: 100%;
+    height: 40%;
+    max-height: 40%;
+    min-height: 40%;
 }
 
-#imageResponse>img{
-    width:80%;
-    max-width: 500px;
-
-}
-#textResponse{
-    text-align: justify;
-   height: 20%;
-   
-    
+#imageResponse > img {
+    width: 100%;
 }
 
+#textResponse {
+    margin: 0 5%;
+    font-weight: 500;
+    font-family: Roboto;
+    color: #575962;
+    height: 43%;
+    max-height: 43%;
+    min-height: 43%;
+    overflow: auto;
+}
 
-#popUpMainDiv{
-    width:100%;height:100%;
-    
+#textResponse > h1 {
+    font-weight: inherit;
+    font-family: inherit;
+    color: inherit;
+}
+
+#textResponse > p#dataResponse {
+    overflow: auto;
+}
+
+#urlResponse {
+    width: 98%;
 }
 
 
+/*#region loader */
+
+.circle {
+    width: 180px;
+    height: 180px;
+    border: 10px inset rgb(133,224,242);
+    display: block;
+    position: fixed;
+    top: 50.5%;
+    left: 51.5%;
+    margin-left: -100px;
+    margin-top: -100px;
+    border-radius: 200px;
+    -moz-animation: rotate 5s infinitelinear;
+    -webkit-animation: rotate 5s infinite linear;
+    animation: rotate 5s infinite linear;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.circle-small {
+    width: 150px;
+    height: 150px;
+    border: 6px outset rgb(133,224,242);
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50.5%;
+    margin-left: -81px;
+    margin-top: -81px;
+    border-radius: 156px;
+    -moz-animation: rotate-rev 3s infinite linear;
+    -webkit-animation: rotate-rev 3s infinite linear;
+    animation: rotate-rev 3s infinite linear;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+
+.circle-inner {
+    width: 80px;
+    height: 80px;
+    background-color: rgb(133,224,242);
+    display: block;
+    position: fixed;
+    top: 49.5%;
+    left: 49.5%;
+    margin-left: -40px;
+    margin-top: -40px;
+    border-radius: 80px;
+    -moz-animation: pulse 1.5s infinite ease-in;
+    -webkit-animation: pulse 1.5s infinite ease-in;
+    animation: pulse 1.5s infinite ease-in;
+    opacity: 1;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.circle-inner-inner {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(74,124,134);
+    display: block;
+    position: fixed;
+    top: 49.5%;
+    left: 49.5%;
+    margin-left: -50px;
+    margin-top: -50px;
+    border-radius: 100px;
+    -moz-animation: pulse 1.5s infinite ease-in;
+    -webkit-animation: pulse 1.5s infinite ease-in;
+    animation: pulse 1.5s infinite ease-in;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+
+/*==============ANIMATIONS=================*/
+
+/*==============ROTATE=====================*/
+
+@-moz-keyframes rotate {
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*==============ROTATE-REV=================*/
+
+@-moz-keyframes rotate-rev {
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+
+    100% {
+        -moz-transform: rotate(-360deg);
+    }
+}
+
+@-webkit-keyframes rotate-rev {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+@keyframes rotate-rev {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+/*==============PULSE======================*/
+
+@-moz-keyframes pulse {
+    0% {
+        -moz-transform: scale(0.1);
+        opacity: 0.2;
+    }
+
+    50% {
+        -moz-transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        -moz-transform: scale(0.1);
+        opacity: 0.2;
+    }
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(0.1);
+        opacity: 0.2;
+    }
+
+    50% {
+        -webkit-transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        -webkit-transform: scale(0.1);
+        opacity: 0.2;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.1);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(0.1);
+        opacity: 0.2;
+    }
+}
+
+/*#endregion */
+
+footer {
+    background-color: black;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    height: 100px;
+}

@@ -1,129 +1,179 @@
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
-        <script src="js/jquery-1.11.0.min.js"></script>
-        <script src="cordova.js"></script>      
-        <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
-        <link href="css/ionic.css" rel="stylesheet" type="text/css"/>
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="cordova.js"></script>
+    <link href="css/normalize.css" rel="stylesheet" type="text/css" />
+    <link href="css/ionic.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-        <script>
-            var popUpActive = false;
-            $(document).click(function (e) {
-                if (e.target.id !== '#popUpDiv' && !$('#popUpDiv').find(e.target).length && popUpActive === true) {
-                    $("#popUpDiv").fadeOut("fast", function () {
-                        popUpActive = false;
-                    });
-                }
+    <script>
+        //Variables 
+        var popUpActive = false;
+        var urlApi = "http://localhost:52183/api/";
+        var catchoomCollectionId = "1698fba1bd6f4de2";
+        var customerId = "1";
+
+        document.addEventListener("deviceready", startCraftAR, false);
+
+        //Start search catchoom
+
+        function startCraftAR() {
+            //debug();
+            setLanguages();
+            CraftARSDK.onStartCapture(didStartCapture);
+            CraftARSDK.startCapture();
+        }
+
+        function singleShotSearch() {
+            CraftARSDK.singleShotSearch();
+            toggleTabItem("#loadingGif", "show");
+            toggleTabItem("#shutterButton", "hide");
+        }
+
+        function onError(error) {
+            // Error searching, restart the capture
+            toggleTabItem("#loadingGif", "hide");
+            toggleTabItem("#shutterButton", "show");
+            alert(error.errorMessage);
+            CraftARSDK.camera.restartCapture();
+        }
+
+        function getResults(results) {
+
+            toggleTabItem("#loadingGif", "hide");
+            toggleTabItem("#shutterButton", "show");
+            if (results.length > 0) {
+                toggleTabItem("#loadingGif", "hide");
+                var item = results[0].item;
+                var ref = cordova.InAppBrowser.open(addhttp(item.url), '_blank', 'location=no');
+                ref.addEventListener("exit", function () { CraftARSDK.closeView(); });
+                CraftARSDK.stopFinder();
+                // sendLogs(item);
+            }
+            else {
+                sendLogs();
+                CraftARSDK.camera.restartCapture();
+            }
+        }
+
+        function didStartCapture() {
+            CraftARCloudRecognition.setCollectionWithToken(catchoomCollectionId, function () {
+                CraftARSDK.searchController = CraftARCloudRecognition.searchController;
+                CraftARCloudRecognition.onSearchResults(getResults);
+                CraftARCloudRecognition.onSearchError(onError);
+                toggleTabItem("#shutterButton", "show");
+
+            }, function (error) {
+                alert("Error:" + error.errorMessage);
             });
+        }
 
-            function singleShotSearch() {
-                CraftARSDK.singleShotSearch();
-                toggleTabItem("#loadingGif", "show");
-                toggleTabItem("#shutterButton", "hide");
+        function toggleTabItem(name, action) {
+            if (action === "hide") {
+                $(name).css("visibility", "hidden");
+                $(name).removeClass("tab-item");
+                $(name).css("width", "0px");
+            } else {
+                $(name).css("visibility", "visible");
+                $(name).addClass("tab-item");
+                $(name).css("width", "auto");
             }
+        }
 
-            function onError(error) {
-                // Error searching, restart the capture
-                toggleTabItem("#loadingGif", "hide");
-                toggleTabItem("#shutterButton", "show");
-                CraftARSDK.camera.restartCapture();
+        function addhttp(url) {
+            if (!/^(f|ht)tps?:\/\//i.test(url)) {
+                url = "http://" + url;
             }
+            return url;
+        }
 
-            function getResults(results) {
-                toggleTabItem("#loadingGif", "hide");
-                toggleTabItem("#shutterButton", "show");
-                if (results.length > 0) {
-                    var item = results[0].item;
-                    itemHTML = item;
-                    $("#nameResponse").html(item.name);
-                    $("#image_src").attr("src", results[0].matchedImage.thumbnail320Url);
-                    $("#idResponse").html(item.uuid);
-                    $('#popUpDiv').fadeIn("fast", function () {
-                        popUpActive = true;
-                    });
-                } else {
-                    alert("Nothing found!");
+        function debug() {
+            var result = {
+                "search_time": 181,
+                "results": [
+                    {
+                        "item": {
+                            "uuid": "1ec2d8d81b024dfba9883ea71d7d6913",
+                            "url": "www.google.com",
+                            "custom": "https://crs-beta-catchoom.s3.amazonaws.com/collections/2aa43260abc3487c87b11ca660f901f6/metadata/1ec2d8d81b024dfba9883ea71d7d6913.json",
+                            "content": null,
+                            "trackable": false,
+                            "images": [
+                                "feb49dc06d124e4b9885a3176f8a157c"
+                            ],
+                            "name": "DSC07416"
+                        },
+                        "image": "feb49dc06d124e4b9885a3176f8a157c",
+                        "score": 100
+                    }
+                ],
+                "collection": {
+                    "pubkey": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs8ZhcV7fRoMRILqf6xhx\nfSaZXYc7KUmhFDwVBzm1ivx8234tFkOxoamFRKfCy+7ajTGfxA+eFM4e8U+/tNrO\n8518d2EGRg5ntMkDpBlFNsA7vG1Gc6eMPEzOD3SQy3ZxFsCrORzlKFKxVG2FCDv8\nfWp2xHmaNies8uRIYAN/spCmzq71QTgKLA0h1+n8yr6CEdgKN8If5ulIZVo6muIN\n54DToaqv9usQRpRGFCDrc4rQ21covQhe4lWjH0nunzSbrOg5abiWGgGuF7NQS1oR\nRSlkwOTKI+ybOtBAlNIKMYSKvBD6plhvDaFbsHtZFjYE87+Lzy4KgVgl0nbYl3Q6\nPwIDAQAB\n-----END PUBLIC KEY-----",
+                    "uuid": "2aa43260abc3487c87b11ca660f901f6",
+                    "image_template": "https://crs-beta-catchoom.s3.amazonaws.com/cache/collections/{0}/images/{1}_{2}_thumb_120.jpe",
+                    "app_id": "com.catchoom.test"
                 }
-                CraftARSDK.camera.restartCapture();
+            }
+            getResults(result.results);
+        }
+
+        function sendLogs(item) {
+            var model = device.model;
+            var platform = device.platform;
+            var uuid = device.uuid;
+            var version = device.version;
+            var manufacturer = device.manufacturer;
+            var log = {
+                model,
+                platform,
+                uuid,
+                version,
+                manufacturer,
+                catchoomCollectionId
+            }
+            if (item !== null && item !== undefined) {
+                log.catchoomItemId = item.uuid;
             }
 
-            function didStartCapture() {
-                CraftARCloudRecognition.setCollectionWithToken("catchoomcooldemo", function () {
-                    CraftARSDK.searchController = CraftARCloudRecognition.searchController;
+            $.post(urlApi + "customers/" + customerId, log, function (data) {
+                console.log(data);
+            });
+        }
 
-                    CraftARCloudRecognition.onSearchResults(getResults);
-                    CraftARCloudRecognition.onSearchError(onError);
-                    toggleTabItem("#shutterButton", "show");
+        function setLanguages() {
+            switch(navigator.language){
+                case "fr-BE":
+                    $("#headerTitle").text('Scanner une image');
+                    break;
+                default:
+            }       
+        }
 
-                }, function (error) {
-                    alert("Error:" + error.errorMessage);
+        $(document).click(function (e) {
+            if (e.target.id !== '#popUpDiv' && !$('#popUpDiv').find(e.target).length && popUpActive === true) {
+                $("#popUpDiv").fadeOut("fast", function () {
+                    popUpActive = false;
                 });
             }
+        });
 
+    </script>
 
-            function startCraftAR()
-            {
-                CraftARSDK.onStartCapture(didStartCapture);
-                CraftARSDK.startCapture();
-            }
+</head>
+<body>
+<div class="bar bar-header bar-light">
+    <h5 class="title" id="headerTitle"></h5>
+</div>
 
-            document.addEventListener("deviceready", function () {
-                startCraftAR();
-            }, false);
-
-            function toggleTabItem(name, action) {
-                if (action === "hide") {
-                    $(name).css("visibility", "hidden");
-                    $(name).removeClass("tab-item");
-                    $(name).css("width", "0px");
-                } else {
-                    $(name).css("visibility", "visible");
-                    $(name).addClass("tab-item");
-                    $(name).css("width", "auto");
-                }
-            }
-
-            function goBack() {
-                CraftARSDK.closeView();
-            }
-        </script>
-
-    </head>
-    <body >
-        <div class="bar bar-header bar-light">
-            <h5 class="title" id="headerTitle">Cloud Image Recognition</h5>
-            <ion-nav-buttons side="left">
-                <button class="button button-clear" onclick="goBack()" >Back</button>
-            </ion-nav-buttons>
-        </div>
-
-        <div class="tabs tabs-icon-only" >
-            <a class="tab-item" id="shutterButton" style="visibility:hidden;width:0px;">
-                <img class="icon ion-home" src="img/shutterButton.png"  id="mybutton" onclick="singleShotSearch()" alt="" />
-            </a>
-            <div id="loadingGif" style="visibility:hidden;width:0px;">
-                <img src="img/spinner.gif" style="height:80%;"/>
-            </div>
-        </div>
-
-        <div id="popUpDiv" style="color:white" >
-            <div id="popUpMainDiv">
-                <img src="img/closeButton.png" id="closeButton" onclick=" $('#popUpDiv').fadeOut('slow', function () {
-                            popUpActive = false;
-                        });" alt="" style="max-width: 80%; max-height: 80%"/>
-                <div id="responseDiv">
-                    <div id="imageResponse">
-                        <img src="#" id="image_src" alt=""/>
-                    </div>
-                    <div id="textResponse">
-                        <h1 id="nameResponse"></h1>
-                        <h3 id="idResponse"></h3>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </body>
+<div class="tabs tabs-icon-only">
+    <a class="tab-item" id="shutterButton" style="visibility:hidden;width:0px;">
+        <i class="icon ion-camera" style="font-size:2em" id="mybutton" onclick="singleShotSearch()"></i>       
+    </a>
+    <div id="loadingGif" style="visibility:hidden;width:0px;">
+        <img src="img/spinner.gif" style="height:80%;" />
+    </div>
+</div>
+</body>
 </html>
