@@ -1,0 +1,21 @@
+{
+  "android": {
+    "release": {
+      "keystore": "D:\\projects\\picturerecognition\\craftar-cordova-examples-cloud-ir\\picture-recognition-ionic-key.keystore",
+      "storePassword": "303Media",
+      "alias": "303Media",
+      "password": "303Media",
+      "keystoreType": ""
+    }
+  },
+  "ios": {
+    "debug": {
+      "developmentTeam": "ABCD12345Z"
+    },
+    "release": {
+      "developmentTeam": "ABCD12345Z",
+      "codeSignIdentity": "iPhone Developer",
+      "packageType": "ad-hoc"
+    }
+  }
+}
