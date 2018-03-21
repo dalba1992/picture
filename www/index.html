@@ -11,170 +11,210 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/angular-translate.min.js"></script>
+    <script src="lib/angular-translate-loader-static-files.min.js"></script>
+    <script src="lib/ionic/js/angular/angular-route.min.js"></script>
+
 
     <!-- your app's js -->
-    <script src="js/app.js"></script>
+    <script src="app/modules/app.js"></script>
+    <script src="app/config/config.js"></script>
+    <script src="app/routes/routes.js"></script>
+    <script src="app/views/howtouse/howtouseController.js"></script>
+    <script src="app/routesController.js"></script>
 
     <!-- cordova js -->
     <script src="cordova.js"></script>
-<style>
 
-    .loading-container .loading{
-        padding: 0;
-        background: none;
-    }
+    <style>
+        .image-header {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .loading-container .loading {
+            padding: 0;
+            background: none;
+        }
+
         .loader {
-        width: 120px;
-        height: 120px;
-        -webkit-transform: rotate(-90deg);
-        transform: rotate(-90deg);
-        stroke-linecap: round;
-        stroke-width: 4;
-        fill: none;
-    }
-    .loader .internal-circle,
-    .loader .external-circle {
-        stroke: #fff;
-        stroke-dashoffset: 0;
-        -webkit-transform-origin: center;
-        transform-origin: center;
-    }
-    .loader .internal-circle {
-        stroke-dasharray: 187;
-        -webkit-animation: internal 1s ease-in-out infinite;
-        animation: internal 1s ease-in-out infinite;
-        opacity: .4;
-    }
-    .loader .external-circle {
-        stroke-dasharray: 312;
-        -webkit-animation: external 1s linear infinite;
-        animation: external 1s linear infinite;
-        opacity: .9;
-    }
-    @-webkit-keyframes internal {
-        0% {
-            stroke-dashoffset: 187;
+            width: 120px;
+            height: 120px;
+            -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+            stroke-linecap: round;
+            stroke-width: 4;
+            fill: none;
         }
-        25% {
-            stroke-dashoffset: 80;
-        }
-        100% {
-            stroke-dashoffset: 187;
-            -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    }
 
-    @keyframes internal {
-        0% {
-            stroke-dashoffset: 187;
+        .loader .internal-circle,
+        .loader .external-circle {
+            stroke: #fff;
+            stroke-dashoffset: 0;
+            -webkit-transform-origin: center;
+            transform-origin: center;
         }
-        25% {
-            stroke-dashoffset: 80;
-        }
-        100% {
-            stroke-dashoffset: 187;
-            -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
-    }
-    @-webkit-keyframes external {
-        0% {
-            stroke-dashoffset: 312;
-            -webkit-transform: rotate(70deg);
-            transform: rotate(70deg);
-        }
-        60% {
-            stroke-dashoffset: -312;
-        }
-        100% {
-            stroke-dashoffset: -312;
-            -webkit-transform: rotate(450deg);
-            transform: rotate(450deg);
-        }
-    }
-    @keyframes external {
-        0% {
-            stroke-dashoffset: 312;
-            -webkit-transform: rotate(70deg);
-            transform: rotate(70deg);
-        }
-        60% {
-            stroke-dashoffset: -312;
-        }
-        100% {
-            stroke-dashoffset: -312;
-            -webkit-transform: rotate(450deg);
-            transform: rotate(450deg);
-        }
-    }
-    @-webkit-keyframes bgcolors {
-        0% {
-            background: #1a87c5;
-        }
-        25% {
-            background: #c51a3a;
-        }
-        50% {
-            background: #e6d121;
-        }
-        75% {
-            background: #22cf76;
-        }
-        100% {
-            background: #1a87c5;
-        }
-    }
-    @keyframes bgcolors {
-        0% {
-            background: #1a87c5;
-        }
-        25% {
-            background: #c51a3a;
-        }
-        50% {
-            background: #e6d121;
-        }
-        75% {
-            background: #22cf76;
-        }
-        100% {
-            background: #1a87c5;
-        }
-    }
 
-</style>
+        .loader .internal-circle {
+            stroke-dasharray: 187;
+            -webkit-animation: internal 1s ease-in-out infinite;
+            animation: internal 1s ease-in-out infinite;
+            opacity: .4;
+        }
+
+        .loader .external-circle {
+            stroke-dasharray: 312;
+            -webkit-animation: external 1s linear infinite;
+            animation: external 1s linear infinite;
+            opacity: .9;
+        }
+
+        @-webkit-keyframes internal {
+            0% {
+                stroke-dashoffset: 187;
+            }
+            25% {
+                stroke-dashoffset: 80;
+            }
+            100% {
+                stroke-dashoffset: 187;
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes internal {
+            0% {
+                stroke-dashoffset: 187;
+            }
+            25% {
+                stroke-dashoffset: 80;
+            }
+            100% {
+                stroke-dashoffset: 187;
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes external {
+            0% {
+                stroke-dashoffset: 312;
+                -webkit-transform: rotate(70deg);
+                transform: rotate(70deg);
+            }
+            60% {
+                stroke-dashoffset: -312;
+            }
+            100% {
+                stroke-dashoffset: -312;
+                -webkit-transform: rotate(450deg);
+                transform: rotate(450deg);
+            }
+        }
+
+        @keyframes external {
+            0% {
+                stroke-dashoffset: 312;
+                -webkit-transform: rotate(70deg);
+                transform: rotate(70deg);
+            }
+            60% {
+                stroke-dashoffset: -312;
+            }
+            100% {
+                stroke-dashoffset: -312;
+                -webkit-transform: rotate(450deg);
+                transform: rotate(450deg);
+            }
+        }
+
+        @-webkit-keyframes bgcolors {
+            0% {
+                background: #1a87c5;
+            }
+            25% {
+                background: #c51a3a;
+            }
+            50% {
+                background: #e6d121;
+            }
+            75% {
+                background: #22cf76;
+            }
+            100% {
+                background: #1a87c5;
+            }
+        }
+
+        @keyframes bgcolors {
+            0% {
+                background: #1a87c5;
+            }
+            25% {
+                background: #c51a3a;
+            }
+            50% {
+                background: #e6d121;
+            }
+            75% {
+                background: #22cf76;
+            }
+            100% {
+                background: #1a87c5;
+            }
+        }
+
+    </style>
 </head>
-<body ng-app="starter" ng-controller="ScanController">
+<body ng-app="jedcouvre">
+<ion-side-menus>
+    <!-- Left menu -->
+    <ion-side-menu side="left">
+        <div class="image-header">
+            <img src="img/icon-edc.png" height="100"/>
+            <h4>EDC publications</h4>
+        </div>
+        <div class="list" ng-controller="routesController as vm">
 
-<ion-pane>
-    <ion-header-bar class="bar-asser  tive">
-        <h1 class="title">EDC publications</h1>
-    </ion-header-bar>
-    <ion-content>
-        <div class="responsive-container" ng-init="init()">
-            <div id="error" style="z-index: 1000"></div>          
-            <div class="list card" id="scanner-container" ng-show="isLoading === false" ng-click="restartScan()">
-                <div class="item item-divider">
-                    Live scanning
-                </div>
-                <div class="item item-body text-center full-height">
-                    <div class="image-container">
-                        <i class="icon ion-camera" style="font-size:2em"></i>
-                        <h3>
-                            Click here to restart the live scanning
-                        </h3>
-                        <p>
-                    </div>
-                </div>
-            </div>
+            <a class="item item-icon-left" ng-click="vm.goTo('howtouse')">
+                <i class="icon ion-lightbulb"></i>
+                {{'HowToUse'|translate}}
+            </a>
+
+            <a class="item item-icon-left" ng-click="vm.goTo('feedback')">
+                <i class="icon ion-information-circled"></i>
+                {{'SupportAndFeedback'|translate}}
+            </a>
+
+            <a class="item item-icon-left" ng-click="vm.goTo('about')">
+                <i class="icon ion-help-circled"></i>
+                {{'About'|translate}}
+            </a>
 
         </div>
-    </ion-content>
+    </ion-side-menu>
 
-    <div class="bar bar-footer" style="text-align: center; display: block;    line-height: 30px;">
-        EDC publications &copy; 2018
-    </div>
-</ion-pane>
+    <ion-side-menu-content>
+        <ion-pane>
+            <ion-header-bar class="bar-calm">
+                <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+                <h1 class="title">EDC publications</h1>
+
+            </ion-header-bar>
+            <ion-content>
+                <div ng-view>
+
+                </div>
+            </ion-content>
+
+            <div class="bar bar-footer" style="text-align: center; display: block;    line-height: 30px;">
+                EDC publications &copy; 2018
+            </div>
+        </ion-pane>
+    </ion-side-menu-content>
+
+</ion-side-menus>
+
 </body>
 </html>

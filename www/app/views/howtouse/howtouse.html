@@ -1,0 +1,25 @@
+<div class="responsive-container" ng-init="vm.init()">
+    <div id="error" style="z-index: 1000"></div>
+    <div class="list card" id="scanner-container" ng-show="vm.isLoading === false"
+         ng-click="restartScan()">
+        <div class="item item-divider">
+            {{'ExplainationsTitle'|translate}}
+        </div>
+        <div class="item item-body text-center full-height">
+            <div class="image-container" style="margin-bottom: 25px">
+                <h3 class="text-left" ng-bind-html="'ExplainationsText' | translate"></h3>
+            </div>
+
+            <button ng-click="vm.showVideo()"
+                    class="button button-block button-outline button-positive icon-left ion-social-youtube">
+                {{'StartVideoExplaination'|translate}}
+            </button>
+
+            <button ng-click="vm.restartScan()"
+                    class="button button-block button-outline button-positive icon-left ion-camera">
+                {{'StartScan'|translate}}
+            </button>
+        </div>
+    </div>
+
+</div>
