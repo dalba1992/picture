@@ -32,7 +32,7 @@
         }
 
         function showVideo() {
-            var ref = cordova.InAppBrowser.open('http://www.youtube.com/embed/mI8cdArOdM4', '_blank', 'location=no');
+            var ref = cordova.InAppBrowser.open('http://www.youtube.com/embed/9emaiDojZ8w', '_blank', 'location=no');
         }
     }
 })();

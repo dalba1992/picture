@@ -15,7 +15,9 @@
                 templateUrl: "app/views/feedback/feedback.html"
             })
             .when("/about", {
-                templateUrl: "app/views/about/about.html"
+                templateUrl: "app/views/about/about.html",
+                controller: "aboutController",
+                controllerAs:"vm"
             })
             .otherwise({redirectTo: '/howtouse'})
     }

@@ -15,7 +15,7 @@
             default:
         }
         $translateProvider.useStaticFilesLoader({
-            prefix: '/Translations/',
+            prefix: './translations/',
             suffix: '.json'
         });
         $translateProvider.useSanitizeValueStrategy('escapeParameters');

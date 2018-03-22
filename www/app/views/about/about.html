@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<ion-modal-view ng-controller="aboutController as vm">
+    <ion-header-bar class="bar bar-header bar-calm">
+        <h1 class="title">{{'About'|translate}}</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">{{'Cancel'|translate}}</button>
+    </ion-header-bar>
+    <ion-content class="padding text-center" style="padding-top:30px" ng-init="vm.init()">
+        <img src="img/icon-edc.png" height="100"/>
+        <h4>{{'AppName'|translate}}</h4>
+        <h4>{{'Version'|translate}} {{vm.version}}</h4>
+        <h4>{{'Copyright'|translate}}</h4>
+    </ion-content>
+</ion-modal-view>

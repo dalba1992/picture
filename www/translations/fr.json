@@ -1,8 +1,13 @@
 {
   "ExplainationsTitle": "Explications",
-  "ExplainationsText": "Pour utiliser cet application vous devez posséder un catalogue (EDC publication).<br><br> -Veuillez ensuite cliquer sur le boutton 'Démarrer le scan'. <br><br> -Pointez votre smartphone vers l'image que vous souhaitez scanner et appuyé le bouton 'appareil photo'",
+  "ExplainationsText": "Pour utiliser cette application vous devez posséder un catalogue (EDC publication).<br><br> -Veuillez ensuite cliquer sur le bouton 'Démarrer le scan'. <br><br> -Pointez votre smartphone vers l'image que vous souhaitez scanner et appuyer le bouton 'appareil photo'",
   "StartScan": "Démarrer le scan",
   "StartVideoExplaination": "Voir la vidéo démonstrative",
-  "SupportAndFeedback": "Support et commentaire",
-  "HowToUse": "Comment utiliser l'app"
+  "SupportAndFeedback": "Support et commentaires",
+  "HowToUse": "Comment utiliser l'app",
+  "About": "A propos",
+  "Cancel": "Annuler",
+  "Version": "Version : ",
+  "Copyright": "Tous droits réservés © EDC Publications SPRL & 303% Media SPRL",
+  "AppName": "jE.D.Couvre"
 }
