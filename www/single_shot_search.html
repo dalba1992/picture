@@ -25,13 +25,16 @@
         //Start search catchoom
 
         function startCraftAR() {
+            setLanguages();
+            CraftARSDK.onStartCapture(didStartCapture);
+            CraftARSDK.startCapture();
             //debug();
-            var result = verfiyLocalStorage();
-            if (result) {
-                setLanguages();
-                CraftARSDK.onStartCapture(didStartCapture);
-                CraftARSDK.startCapture();
-            }
+            // var result = verfiyLocalStorage();
+            // if (result) {
+            //     setLanguages();
+            //     CraftARSDK.onStartCapture(didStartCapture);
+            //     CraftARSDK.startCapture();
+            // }
 
         }
 
