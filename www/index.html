@@ -9,11 +9,15 @@
     <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    
+    <script src="js/jquery-1.11.0.min.js"></script>
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/angular-translate.min.js"></script>
     <script src="lib/angular-translate-loader-static-files.min.js"></script>
+    <script src="lib/ionic/js/angular/angular-route.min.js"></script>
+    <script src="lib/angular-toastr/angular-toastr.tpls.js"></script>
     <script src="lib/ionic/js/angular/angular-route.min.js"></script>
 
 
@@ -23,13 +27,14 @@
     <script src="app/routes/routes.js"></script>
     <script src="app/views/howtouse/howtouseController.js"></script>
     <script src="app/views/about/aboutController.js"></script>
+    <script src="app/views/feedback/feedbackController.js"></script>
     <script src="app/routesController.js"></script>
 
     <!-- cordova js -->
     <script src="cordova.js"></script>
 
     <style>
-      
+
     </style>
 </head>
 <body ng-app="jedcouvre">
@@ -73,7 +78,8 @@
                 </div>
             </ion-content>
 
-            <div class="bar bar-footer" style="text-align: center; display: block;    line-height: 30px;    font-size: 3vw;">
+            <div class="bar bar-footer"
+                 style="text-align: center; display: block;    line-height: 30px;    font-size: 3vw;">
                 {{'Copyright'|translate}}
             </div>
         </ion-pane>

@@ -5,10 +5,13 @@
           content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="cordova.js"></script>
+    <script src="lib/toastr/toastr.min.js"></script>
     <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
     <link href="css/ionic.css" rel="stylesheet" type="text/css"/>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="lib/toastr/toastr.min.css" rel="stylesheet">
+
     <script>
         //Variables 
         var popUpActive = false;
@@ -16,15 +19,20 @@
         var catchoomCollectionId = "1698fba1bd6f4de2";
         var customerId = "1";
 
+
         document.addEventListener("deviceready", startCraftAR, false);
 
         //Start search catchoom
 
         function startCraftAR() {
             //debug();
-            setLanguages();
-            CraftARSDK.onStartCapture(didStartCapture);
-            CraftARSDK.startCapture();
+            var result = verfiyLocalStorage();
+            if (result) {
+                setLanguages();
+                CraftARSDK.onStartCapture(didStartCapture);
+                CraftARSDK.startCapture();
+            }
+
         }
 
         function singleShotSearch() {
@@ -53,12 +61,12 @@
                     CraftARSDK.closeView();
                 });
                 CraftARSDK.stopFinder();
-                // sendLogs(item);
             }
             else {
-                sendLogs();
+
                 CraftARSDK.camera.restartCapture();
             }
+            setImageCount();
         }
 
         function didStartCapture() {
@@ -148,10 +156,53 @@
         function setLanguages() {
             switch (navigator.language) {
                 case "fr-BE":
-                    $("#headerTitle").text('Scanner une image');
+                    $("#headerTitle").text('Photographier une image');
                     break;
                 default:
             }
+        }
+
+        function setImageCount() {
+            var imageCountObject = JSON.parse(window.localStorage.getItem('numberOfScan'));
+            imageCountObject.count += 1;
+            window.localStorage.setItem('numberOfScan', JSON.stringify(imageCountObject));
+            if (imageCountObject.count > 50) {
+                CraftARSDK.closeView();
+            }
+            else {
+                CraftARSDK.camera.restartCapture();
+            }
+        }
+
+        function verfiyLocalStorage() {
+            var imageCountObject = JSON.parse(window.localStorage.getItem('numberOfScan'));
+            if (!sameDay(new Date(imageCountObject.date), new Date())) {
+                imageCountObject.date = new Date();
+                imageCountObject.count = 0;
+                window.localStorage.setItem('numberOfScan', JSON.stringify(imageCountObject));
+                return true;
+            }
+            else if (imageCountObject.count >= 50) {
+
+
+                switch (navigator.language) {
+                    case "fr-BE":
+                        CraftARSDK.stopCapture();
+                        toastr.options.onHidden = function () {
+                            CraftARSDK.closeView();
+                        }
+                        toastr.info('Vous avez atteint votre quota de photographie journalier', {timeOut: 3000});
+                        break;
+                    default:
+                }
+                return false;
+            }
+        }
+
+        function sameDay(d1, d2) {
+            return d1.getFullYear() === d2.getFullYear() &&
+                d1.getMonth() === d2.getMonth() &&
+                d1.getDate() === d2.getDate();
         }
 
         $(document).click(function (e) {

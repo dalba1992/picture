@@ -12,13 +12,10 @@
                 controllerAs:"vm"
             })
             .when("/feedback", {
-                templateUrl: "app/views/feedback/feedback.html"
-            })
-            .when("/about", {
-                templateUrl: "app/views/about/about.html",
-                controller: "aboutController",
+                templateUrl: "app/views/feedback/feedback.html",
+                controller: "feedbackController",
                 controllerAs:"vm"
-            })
+            })          
             .otherwise({redirectTo: '/howtouse'})
     }
 })();

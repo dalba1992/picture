@@ -1,10 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="list card">
+    <div class="item item-divider">
+        {{'SupportAndFeedback'|translate}}
+    </div>
+    <div class="item item-body text-center full-height">
+        <form name="vm.feedbackForm">
+            <div class="list text-left">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">{{'YourAddressEmail'|translate}}</span>
+                    <input ng-model="vm.feedback.email" type="email" required>
+                </label>
+                <div class="alert alert-danger" ng-if="vm.errors.email">
+                    <strong>{{'Error'|translate}}</strong> {{'ErrorEmail'|translate}}
+                </div>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        {{'Subject'|translate}}
+                    </div>
+                    <select ng-model="vm.feedback.subject">
+                        <option ng-init="vm.feedback.subject = vm.subjects[0].value" value="{{subject.value}}"
+                                ng-repeat="subject in vm.subjects">{{subject.value}}
+                        </option>
+                    </select>
+                </label>
+                <div class="alert alert-danger" ng-if="vm.errors.subject">
+                    <strong>{{'Error'|translate}}</strong> {{'ErrorEmail'|translate}}
+                </div>
+                <label class="item item-input" style="margin-top: 25px">
+                    <span class="input-label" style="min-width: 121px">{{'Description'|translate}}</span>
+                    <textarea ng-model="vm.feedback.description" rows="15" style=" resize: none;" required></textarea>
+                </label>
+                <div class="alert alert-danger" ng-if="vm.errors.description">
+                    <strong>{{'Error'|translate}}</strong> {{'ErrorEmail'|translate}}
+                </div>
+            </div>
+            <button class="button button-block button-outline button-positive icon-left ion-paper-airplane"
+                    ng-disabled="vm.feedbackForm.$invalid ||  vm.isSending" ng-click="vm.sendFeedBack()">
+                {{'Send'|translate}}
+            </button>
+        </form>
+    </div>
+</div>
 
-</body>
-</html>
+<style>
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .alert-danger {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+    }
+
+    .item-input {
+        display: block !important;
+    }
+
+    .input-label {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .item-select select {
+        position: relative !important;
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+        direction: unset;
+    }
+
+    .item-select:after {
+        top: 60% !important;
+
+    }
+</style>

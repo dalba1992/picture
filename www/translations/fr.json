@@ -1,7 +1,7 @@
 {
   "ExplainationsTitle": "Explications",
-  "ExplainationsText": "Pour utiliser cette application vous devez posséder un catalogue (EDC publication).<br><br> -Veuillez ensuite cliquer sur le bouton 'Démarrer le scan'. <br><br> -Pointez votre smartphone vers l'image que vous souhaitez scanner et appuyer le bouton 'appareil photo'",
-  "StartScan": "Démarrer le scan",
+  "ExplainationsText": "Pour utiliser cette application vous devez posséder un catalogue (EDC publication).<br><br> -Veuillez ensuite cliquer sur le bouton 'Démarrer la caméra'. <br><br> -Pointez votre smartphone vers l'image que vous souhaitez photographier et appuyer le bouton 'appareil photo'",
+  "StartScan": "Démarrer la caméra",
   "StartVideoExplaination": "Voir la vidéo démonstrative",
   "SupportAndFeedback": "Support et commentaires",
   "HowToUse": "Comment utiliser l'app",
@@ -9,5 +9,16 @@
   "Cancel": "Annuler",
   "Version": "Version : ",
   "Copyright": "Tous droits réservés © EDC Publications SPRL & 303% Media SPRL",
-  "AppName": "jE.D.Couvre"
+  "AppName": "jE.D.Couvre",
+  "YourAddressEmail": "Adresse email",
+  "Subject": "Sujet",
+  "Description": "Description",
+  "Question": "Question",
+  "Bug": "Erreurs",
+  "FeatureRequest": "Demande de fonctionnalité",
+  "Send": "Envoyer",
+  "SuccessCreateFeedbackMessage": "Vous requête a été envoyée et nous y donnerons suite dans les plus brefs délais",
+  "SuccessCreateFeedbackTitle": "Requête soumise",
+  "WarnCreateFeedbackMessage": "Votre requête n'a pas été soumise. Veuillez réessayer si le problème persiste contacter nous par mail à l'adresse support@303.media",
+  "WarnCreateFeedbackTitle": "Echec"
 }

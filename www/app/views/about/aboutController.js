@@ -6,7 +6,7 @@
         .controller('aboutController', aboutController);
 
 
-    function aboutController($timeout, $ionicLoading) {
+    function aboutController() {
         var vm = this;
         vm.init = init;
         vm.version = "";
