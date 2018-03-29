@@ -48,7 +48,6 @@
             // Error searching, restart the capture
             toggleTabItem("#loadingGif", "hide");
             toggleTabItem("#shutterButton", "show");
-            alert(error.errorMessage);
             CraftARSDK.camera.restartCapture();
         }
 
@@ -66,10 +65,9 @@
                 CraftARSDK.stopFinder();
             }
             else {
-
                 CraftARSDK.camera.restartCapture();
             }
-            setImageCount();
+            // setImageCount();
         }
 
         function didStartCapture() {

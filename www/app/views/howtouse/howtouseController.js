@@ -28,7 +28,6 @@
         }
 
         function restartScan() {
-            alert(window.localStorage.getItem('numberOfScan'));
             CraftARSDK.startView(null, null, {"loadUrl": "single_shot_search.html"});
         }
 
