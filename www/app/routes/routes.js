@@ -15,7 +15,12 @@
                 templateUrl: "app/views/feedback/feedback.html",
                 controller: "feedbackController",
                 controllerAs:"vm"
-            })          
+            })
+            .when("/gallery", {
+                templateUrl: "app/views/gallery/gallery.html",
+                controller: "galleryController",
+                controllerAs:"vm"
+            })
             .otherwise({redirectTo: '/howtouse'})
     }
 })();

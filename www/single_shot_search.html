@@ -20,14 +20,18 @@
         var customerId = "1";
 
 
-        document.addEventListener("deviceready", startCraftAR, false);
+        startCraftAR();
 
         //Start search catchoom
 
         function startCraftAR() {
-            setLanguages();
-            CraftARSDK.onStartCapture(didStartCapture);
-            CraftARSDK.startCapture();
+            setTimeout(function () {
+                console.log("start");
+                setLanguages();
+                CraftARSDK.onStartCapture(didStartCapture);
+                CraftARSDK.startCapture();
+            }, 2000)
+
             //debug();
             // var result = verfiyLocalStorage();
             // if (result) {
@@ -72,6 +76,7 @@
 
         function didStartCapture() {
             CraftARCloudRecognition.setCollectionWithToken(catchoomCollectionId, function () {
+                console.log("collection set")
                 CraftARSDK.searchController = CraftARCloudRecognition.searchController;
                 CraftARCloudRecognition.onSearchResults(getResults);
                 CraftARCloudRecognition.onSearchError(onError);
@@ -155,6 +160,7 @@
         }
 
         function setLanguages() {
+            console.log(navigator.language);
             switch (navigator.language) {
                 case "fr-BE":
                     $("#headerTitle").text('Photographier une image');

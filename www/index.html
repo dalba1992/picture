@@ -9,7 +9,7 @@
     <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    
+
     <script src="js/jquery-1.11.0.min.js"></script>
 
     <!-- ionic/angularjs js -->
@@ -28,6 +28,7 @@
     <script src="app/views/howtouse/howtouseController.js"></script>
     <script src="app/views/about/aboutController.js"></script>
     <script src="app/views/feedback/feedbackController.js"></script>
+    <script src="app/views/gallery/galleryController.js"></script>
     <script src="app/routesController.js"></script>
 
     <!-- cordova js -->
@@ -50,6 +51,10 @@
             <a class="item item-icon-left" ng-click="vm.goTo('howtouse')">
                 <i class="icon ion-lightbulb"></i>
                 {{'HowToUse'|translate}}
+            </a>
+            <a class="item item-icon-left" ng-click="vm.goTo('gallery')">
+                <i class="icon ion-images"></i>
+                {{'Gallery'|translate}}
             </a>
 
             <a class="item item-icon-left" ng-click="vm.goTo('feedback')">
