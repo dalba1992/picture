@@ -28,9 +28,7 @@
 
             document.addEventListener("deviceready", function () {
                 if (device.platform === "iOS") {
-                    $("#header").height("69px");
-                    $("#header-title").css('margin-top', "17px");
-                    $("#header-icon").css('margin-top', "20px");
+                    $("#header").addClass("ios");
                 }
                 setLanguages();
                 CraftARSDK.onStartCapture(didStartCapture);
@@ -232,12 +230,37 @@
         }
 
     </script>
+    <style>
 
+        #header > h5 {
+            margin-left: 40px
+        }
+
+        #header > i {
+            font-size: 30px;
+            margin-top: 3px;
+            margin-left: 15px;
+            width: 50px;
+        }
+
+        #header.ios {
+            height: 65px;
+        }
+
+        #header.ios > h5 {
+            margin-top: 17px;
+
+        }
+
+        #header.ios > i {
+            margin-top: 20px !important;
+        }
+    </style>
 </head>
 <body>
 <div class="bar bar-header bar-light" id="header">
-    <h5 class="title" id="header-title" style="margin-left:40px"></h5>
-    <i class="icon ion-ios-arrow-back"  id="header-icon" style="font-size: 30px;    margin-top: 3px;    margin-left: 15px;"
+    <h5 class="title" id="header-title"></h5>
+    <i class="icon ion-ios-arrow-back" id="header-icon"
        onclick="closeView()"></i>
 </div>
 
@@ -249,5 +272,6 @@
         <img src="img/spinner.gif" style="height:80%;"/>
     </div>
 </div>
-</body>
+
 </html>
+</body>
