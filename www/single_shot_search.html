@@ -25,12 +25,13 @@
         //Start search catchoom
 
         function startCraftAR() {
-            setTimeout(function () {
+            document.addEventListener("deviceready", function () {
                 console.log("start");
                 setLanguages();
                 CraftARSDK.onStartCapture(didStartCapture);
                 CraftARSDK.startCapture();
-            }, 2000)
+            }, false);
+
 
             //debug();
             // var result = verfiyLocalStorage();
@@ -220,12 +221,19 @@
             }
         });
 
+        function closeView() {
+            CraftARSDK.stopFinder();
+            CraftARSDK.closeView();
+        }
+
     </script>
 
 </head>
 <body>
 <div class="bar bar-header bar-light">
-    <h5 class="title" id="headerTitle"></h5>
+    <h5 class="title" id="headerTitle" style="margin-left:40px"></h5>
+    <i class="icon ion-ios-arrow-back" style="font-size: 30px;    margin-top: 3px;    margin-left: 15px;"
+       onclick="closeView()"></i>
 </div>
 
 <div class="tabs tabs-icon-only" style="background-color: white;">
