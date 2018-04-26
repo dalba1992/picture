@@ -15,7 +15,7 @@
     <script>
         //Variables 
         var popUpActive = false;
-        var urlApi = "http://localhost:52183/api/";
+        // var urlApi = "http://localhost:52183/api/";
         var catchoomCollectionId = "1698fba1bd6f4de2";
         var customerId = "1";
 
@@ -25,8 +25,13 @@
         //Start search catchoom
 
         function startCraftAR() {
+
             document.addEventListener("deviceready", function () {
-                console.log("start");
+                if (device.platform === "iOS") {
+                    $("#header").height("69px");
+                    $("#header-title").css('margin-top', "17px");
+                    $("#header-icon").css('margin-top', "19px");
+                }
                 setLanguages();
                 CraftARSDK.onStartCapture(didStartCapture);
                 CraftARSDK.startCapture();
@@ -164,7 +169,7 @@
             console.log(navigator.language);
             switch (navigator.language) {
                 case "fr-BE":
-                    $("#headerTitle").text('Photographier une image');
+                    $("#header-title").text('Photographier une image');
                     break;
                 default:
             }
@@ -230,9 +235,9 @@
 
 </head>
 <body>
-<div class="bar bar-header bar-light">
-    <h5 class="title" id="headerTitle" style="margin-left:40px"></h5>
-    <i class="icon ion-ios-arrow-back" style="font-size: 30px;    margin-top: 3px;    margin-left: 15px;"
+<div class="bar bar-header bar-light" id="header">
+    <h5 class="title" id="header-title" style="margin-left:40px"></h5>
+    <i class="icon ion-ios-arrow-back"  id="header-icon" style="font-size: 30px;    margin-top: 3px;    margin-left: 15px;"
        onclick="closeView()"></i>
 </div>
 
