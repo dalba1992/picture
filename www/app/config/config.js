@@ -13,6 +13,8 @@
                 $translateProvider.preferredLanguage("nl");
                 break;
             default:
+                $translateProvider.preferredLanguage("en");
+                break;
         }
         $translateProvider.useStaticFilesLoader({
             prefix: './translations/',
